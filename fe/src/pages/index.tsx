@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { File } from './components/File';
-import { Upload } from './components/Upload';
+import { UploadComponent } from './components/UploadComponent';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -21,7 +21,7 @@ export default function IndexPage() {
         <File />
       </div>
       <div className="upload">
-        <Upload />
+        <UploadComponent />
       </div>
     </Wrapper>
   );

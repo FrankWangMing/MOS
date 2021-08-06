@@ -13,9 +13,8 @@ const _ = require('lodash');
  * 遍历指定目录下的所有文件
  * @param {*} dir
  */
-export const getAllFile = function (d) {
+export const getAllFile = function (dir) {
   // const dir = path.resolve(d);
-  const dir = d;
   const result = [];
   function traverse(dir) {
     fs.readdirSync(dir).forEach((file) => {
@@ -25,7 +24,11 @@ export const getAllFile = function (d) {
       } else {
         const item = pathname.split('\\');
         item.map((value, index) => {
-          const obj = { title: value, children: [] };
+          const obj = {
+            title: value,
+            key: `${value + Math.random()}`,
+            children: [],
+          };
           findPath(obj, index, result, item);
         });
       }

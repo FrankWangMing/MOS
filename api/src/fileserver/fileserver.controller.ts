@@ -22,7 +22,9 @@ export class FileserverController {
 
   @Get()
   findAll() {
-    return this.fileserverService.getAllFile();
+    return {
+      data: this.fileserverService.getAllFile()
+    };
   }
 
   @Get(':id')

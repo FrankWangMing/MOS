@@ -10,6 +10,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateFileserverDto } from './dto/create-fileserver.dto';
 import { UpdateFileserverDto } from './dto/update-fileserver.dto';
 import { getAllFile } from '../utils/file';
+import path from 'path';
 @Injectable()
 export class FileserverService {
   create(createFileserverDto: CreateFileserverDto) {
@@ -36,6 +37,6 @@ export class FileserverService {
   }
 
   getAllFile() {
-    return getAllFile('./dist');
+    return getAllFile('./../files');
   }
 }

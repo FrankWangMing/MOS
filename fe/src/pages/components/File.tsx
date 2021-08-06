@@ -4,13 +4,54 @@
  * @Author: WangMing
  * @Date: 2021-08-04 14:43:41
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2021-08-04 15:43:27
+ * @LastEditTime: 2021-08-05 17:51:04
  */
-import { observer, useLocalStore } from 'mobx-react-lite';
+import { file } from '@/domain';
+import { observer, useLocalObservable } from 'mobx-react-lite';
 import React from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
-const Wrapper = styled.div``;
+import { FileTree } from './FileTree';
+import { Button } from 'antd';
+
+const Wrapper = styled.div`
+  .filelist-box {
+    padding: 10px 15px;
+  }
+`;
 export const File = observer(() => {
-  const state = useLocalStore(() => ({}));
-  return <Wrapper> File </Wrapper>;
+  const state = useLocalObservable(() => ({
+    data: [],
+    setData(data) {
+      state.data = data;
+    },
+    active: [],
+    setActive(active) {
+      state.active = active;
+    },
+  }));
+  useEffect(() => {
+    file.getFile().then((res) => {
+      console.log(res);
+      state.setData(res);
+    });
+  }, []);
+  return (
+    <Wrapper>
+      <div className="filelist-box">
+        <Button
+          type="primary"
+          disabled={state.active.length == 0 ? true : false}
+          style={{ marginBottom: '10px' }}
+        >
+          下载
+        </Button>
+        <FileTree
+          data={state.data}
+          active={state.active}
+          setActive={state.setActive}
+        />
+      </div>
+    </Wrapper>
+  );
 });

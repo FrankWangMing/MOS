@@ -1,0 +1,13 @@
+{
+  "type": "postgresql",
+  "host": "123.207.29.109",
+  "port": 3306,
+  "username": "root",
+  "password": "123456",
+  "database": "test",
+  "entities": [
+    "src/**/**.entity{.ts,.js}"
+  ],
+  "insecureAuth": true,
+  "synchronize": true
+}

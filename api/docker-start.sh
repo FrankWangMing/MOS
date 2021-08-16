@@ -1,1 +1,1 @@
-pm2 start ./dist/src/main.js
+pm2 start mosApi/dist/src/main.js

@@ -37,6 +37,6 @@ export class FileserverService {
   }
 
   getAllFile() {
-    return getAllFile('./../files');
+    return getAllFile('/var/www/html');
   }
 }

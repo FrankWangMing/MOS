@@ -36,6 +36,14 @@ export const File = observer(() => {
       state.setData(res);
     });
   }, []);
+
+  const download = () => {
+    console.log(state.active);
+    state.active.map((i: string) => {
+      console.log();
+      window.open(`http://10.0.1.89:7777${i.substring(13)}`);
+    });
+  };
   return (
     <Wrapper>
       <div className="filelist-box">
@@ -43,6 +51,7 @@ export const File = observer(() => {
           type="primary"
           disabled={state.active.length == 0 ? true : false}
           style={{ marginBottom: '10px' }}
+          onClick={download}
         >
           下载
         </Button>

@@ -25,14 +25,19 @@ export const FileTree = observer((prop: Prop) => {
 
   const onCheck = (checkedKeysValue: React.Key[]) => {
     console.log('onCheck', checkedKeysValue);
-
     setCheckedKeys(checkedKeysValue);
     prop.setActive(checkedKeysValue);
   };
 
   const onSelect = (selectedKeysValue: React.Key[], info: any) => {
     console.log('onSelect', info);
+    console.log('onSelect', selectedKeysValue);
+
+    // console.log(checkedKeys.push(selectedKeysValue[0]))
+    setCheckedKeys([...checkedKeys, selectedKeysValue[0]]);
+    // setCheckedKeys(checkedKeys.push(selectedKeysValue[0]));
     setSelectedKeys(selectedKeysValue);
+    prop.setActive([...checkedKeys, selectedKeysValue[0]]);
   };
 
   return (

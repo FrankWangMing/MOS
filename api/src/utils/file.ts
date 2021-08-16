@@ -26,7 +26,7 @@ export const getAllFile = function (dir) {
         item.map((value, index) => {
           const obj = {
             title: value,
-            key: `${value + Math.random()}`,
+            key: value,
             children: [],
           };
           findPath(obj, index, result, item);

@@ -16,8 +16,9 @@ export const UploadComponent = observer(() => {
   const props = {
     name: 'file',
     multiple: true,
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    onChange(info) {
+    action: 'http://127.0.0.1:7779/fileserver/upload',
+    onChange(info: { file: { name?: any; status?: any }; fileList: any }) {
+      console.log(info);
       const { status } = info.file;
       if (status !== 'uploading') {
         console.log(info.file, info.fileList);
@@ -28,7 +29,7 @@ export const UploadComponent = observer(() => {
         message.error(`${info.file.name} file upload failed.`);
       }
     },
-    onDrop(e) {
+    onDrop(e: { dataTransfer: { files: any } }) {
       console.log('Dropped files', e.dataTransfer.files);
     },
   };
@@ -38,13 +39,8 @@ export const UploadComponent = observer(() => {
         <p className="ant-upload-drag-icon">
           <InboxOutlined />
         </p>
-        <p className="ant-upload-text">
-          Click or drag file to this area to upload
-        </p>
-        <p className="ant-upload-hint">
-          Support for a single or bulk upload. Strictly prohibit from uploading
-          company data or other band files
-        </p>
+        <p className="ant-upload-text">上传文件</p>
+        <p className="ant-upload-hint">支持拖拽</p>
       </Dragger>
     </Wrapper>
   );

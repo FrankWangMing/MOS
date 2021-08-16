@@ -1,44 +1,43 @@
 /*
- * @Descripttion: 
- * @version: 
+ * @Descripttion:
+ * @version:
  * @Author: WangMing
  * @Date: 2021-08-04 16:08:18
  * @LastEditors: Please set LastEditors
  * @LastEditTime: 2021-08-04 16:39:20
  */
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  UseInterceptors,
+  UploadedFile,
+} from '@nestjs/common';
 import { FileserverService } from './fileserver.service';
-import { CreateFileserverDto } from './dto/create-fileserver.dto';
-import { UpdateFileserverDto } from './dto/update-fileserver.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { join } from 'path';
+import { createWriteStream } from 'fs';
 
 @Controller('fileserver')
 export class FileserverController {
-  constructor(private readonly fileserverService: FileserverService) { }
-
-  @Post()
-  create(@Body() createFileserverDto: CreateFileserverDto) {
-    return this.fileserverService.create(createFileserverDto);
-  }
+  constructor(private readonly fileserverService: FileserverService) {}
 
   @Get()
   findAll() {
     return {
-      data: this.fileserverService.getAllFile()
+      data: this.fileserverService.getAllFile(),
     };
   }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.fileserverService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFileserverDto: UpdateFileserverDto) {
-    return this.fileserverService.update(+id, updateFileserverDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.fileserverService.remove(+id);
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file'))
+  uploadFile(@UploadedFile() file) {
+    console.log(file);
+    const writeImage = createWriteStream(
+      // join('../files', `${file.originalname}`),
+      join('/var/www/html', `${file.originalname}`),
+    );
+    writeImage.write(file.buffer);
+    return file;
   }
 }

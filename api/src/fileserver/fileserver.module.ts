@@ -14,4 +14,4 @@ import { FileserverController } from './fileserver.controller';
   controllers: [FileserverController],
   providers: [FileserverService],
 })
-export class FileserverModule { }
+export class FileserverModule {}

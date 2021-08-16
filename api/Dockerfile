@@ -29,4 +29,4 @@ COPY ./docker-start.sh /
 
 EXPOSE 3000
 
-CMD ["sh", "/docker-start.sh"]
+# CMD ["sh", "./docker-start.sh"]

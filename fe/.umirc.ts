@@ -17,7 +17,7 @@ export default defineConfig({
   proxy: {
     '/api': {
       // target: 'http://10.0.1.89:7779/',
-      target: 'http://localhost:7779/',
+      target: 'http://10.0.1.89:7779/',
       changeOrigin: true,
       pathRewrite: { '^/api': '' },
     },
